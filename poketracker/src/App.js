@@ -1,25 +1,36 @@
 import React from 'react';
 import Home from './components/Home';
 import './App.css';
+import { useEffect, useState } from 'react';
 const { REACT_APP_PRIVATE_KEY } = process.env;
-
-//console.log(REACT_APP_PRIVATE_KEY)
-
 const axios = require('axios')
-
-axios.get('https://api.pokemontcg.io/v2/cards/base1-4', {
-    headers: {
-      "x-api-key": REACT_APP_PRIVATE_KEY,
-    }
-  })
-  .then(res => console.log(res))
-  .catch(err => console.log(err))
 
 
 function App() {
+
+  const [cards, setCards] = useState({})
+  const [search, setSearch] = useState("name:charizard")
+
+  const searchCards = () => {
+    axios.get('https://api.pokemontcg.io/v2/cards', {
+      headers: {
+        "x-api-key": REACT_APP_PRIVATE_KEY,
+      },
+      params: {
+        q: search
+      }
+    })
+    .then(res => setCards(res))
+    .catch(err => console.log(err))
+  }
+
+  useEffect(() => {
+    searchCards()
+  }, [search])
+
   return (
     <div className="App">
-      <Home/>
+      <Home cards={cards}/>
     </div>
   );
 }
