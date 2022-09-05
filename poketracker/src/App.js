@@ -1,6 +1,5 @@
 import React from 'react';
 import Home from './components/Home';
-import './App.css';
 import { useEffect, useState } from 'react';
 const { REACT_APP_PRIVATE_KEY } = process.env;
 const axios = require('axios')

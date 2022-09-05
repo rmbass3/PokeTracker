@@ -1,5 +1,9 @@
 import React from "react";
+import CardGallery from "./CardGallery";
+import Loading from './Loading'
 import { useState, useEffect } from "react";
+import '../styles/Home.css'
+
 
 const Home = ({cards}) => {
 
@@ -12,8 +16,8 @@ const Home = ({cards}) => {
 
   return (
     <div id="home" className="home">
-      Cards are {isLoaded ? 'set' : 'not set'}.
-    </div>
+      {isLoaded ? <CardGallery cards={cards}/> : <Loading/>}
+    </div> 
   )
 }
 

@@ -1,0 +1,16 @@
+.home {
+  height: 100vh;
+  position: relative;
+  background-color: #282c34;
+}
+
+.spinner-border {
+  width: 4rem!important;
+  height: 4rem!important;
+}
+
+.loading {
+  position: absolute;
+  top: 46vh;
+  left: 48vw;
+}
