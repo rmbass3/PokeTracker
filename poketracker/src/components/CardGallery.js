@@ -1,6 +1,7 @@
 import React from "react";
 import Col from 'react-bootstrap/Col'
 import Tilty from 'react-tilty'
+import '../styles/CardGallery.css'
 
 const CardGallery = ({cards, handleShow}) => {
 
