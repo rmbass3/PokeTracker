@@ -12,9 +12,13 @@ const Home = ({cards}) => {
 
   const [isLoaded, setIsLoaded] = useState(false)
   const [show, setShow] = useState(false)
+  const [currentCard, setCurrentCard] = useState({})
 
   const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const handleShow = (card) => {
+    setCurrentCard(card)
+    setShow(true)
+  }
 
   useEffect(() => {
     cards.data ? setIsLoaded(true) : setIsLoaded(false)
@@ -24,7 +28,7 @@ const Home = ({cards}) => {
     <div id="home" className="home">
       {isLoaded ? 
         <div>
-          <CardModal show={show} handleClose={handleClose}/>
+          <CardModal show={show} handleClose={handleClose} currentCard={currentCard}/>
           <Container>
             <Row>
               <CardGallery cards={cards} handleShow={handleShow}/>

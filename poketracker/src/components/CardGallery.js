@@ -15,7 +15,7 @@ const CardGallery = ({cards, handleShow}) => {
             src={card.images.small} 
             className="card-image" 
             alt={card.name}
-            onClick={handleShow}
+            onClick={() => handleShow(card)}
           />
         </div>
       </Tilty>
