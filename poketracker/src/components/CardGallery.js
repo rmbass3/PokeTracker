@@ -2,16 +2,20 @@ import React from "react";
 import Col from 'react-bootstrap/Col'
 import Tilty from 'react-tilty'
 
-const CardGallery = ({cards}) => {
+const CardGallery = ({cards, handleShow}) => {
 
   console.log(cards)
 
   return cards.data.data.map((card) => (
     <Col>
-      <Tilty
-      >
+      <Tilty>
         <div key={card.id} className="card-container mt-5 text-center">
-          <img src={card.images.small} className="card-image" alt={card.name}/>
+          <img 
+            src={card.images.small} 
+            className="card-image" 
+            alt={card.name}
+            onClick={handleShow}
+          />
         </div>
       </Tilty>
     </Col>
