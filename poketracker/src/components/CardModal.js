@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from "react-bootstrap/Container";
+import ListGroup from 'react-bootstrap/ListGroup'
 import '../styles/CardModal.css'
 
 const CardModal = ({show, handleClose, currCard}) => {
@@ -12,27 +13,36 @@ const CardModal = ({show, handleClose, currCard}) => {
   return (
     <div>
       {currCard.id ?
-          <div className="card-modal">
-            <Modal show={show} onHide={handleClose} size="lg" centered>
+          <div>
+            <Modal 
+              className="card-modal" 
+              show={show} 
+              onHide={handleClose} 
+              size="lg" 
+              centered
+              fullscreen="md-down"
+            >
               <Modal.Header closeButton>
-                <Modal.Title>{currCard.name}</Modal.Title>
+                <Modal.Title className="text-dark text-center">{currCard.name}</Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <Container>
                   <Row>
-                    <Col xs={12} md={6}>
+                    <Col s={12} md={6} className="text-center">
                       <img 
                         className="modal-img" 
-                        src={currCard.images.large} 
+                        src={currCard.images.large}
                         alt={currCard.name}>
                       </img>
                     </Col>
-                    <Col xs={12} md={6}>
-                      <img 
-                        className="modal-img" 
-                        src={currCard.images.large} 
-                        alt={currCard.name}>
-                      </img>
+                    <Col s={12} md={6}>
+                      <ListGroup>
+                        <ListGroup.Item variant="dark">Series: {currCard.set.series}</ListGroup.Item> 
+                        <ListGroup.Item variant="dark">Set: {currCard.set.name}</ListGroup.Item>
+                        <ListGroup.Item variant="dark">Released: {currCard.set.releaseDate}</ListGroup.Item>
+                        <ListGroup.Item variant="dark">Artist: {currCard.artist}</ListGroup.Item>
+                        <ListGroup.Item variant="dark">Rarity: {currCard.rarity}</ListGroup.Item> 
+                      </ListGroup>
                     </Col>
                   </Row>
                 </Container>
@@ -42,7 +52,7 @@ const CardModal = ({show, handleClose, currCard}) => {
                   Close
                 </Button>
                 <Button variant="primary" onClick={handleClose}>
-                  Save Changes
+                  Add to Collection
                 </Button>
               </Modal.Footer>
             </Modal>
