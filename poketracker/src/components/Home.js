@@ -12,11 +12,12 @@ const Home = ({cards}) => {
 
   const [isLoaded, setIsLoaded] = useState(false)
   const [show, setShow] = useState(false)
-  const [currentCard, setCurrentCard] = useState({})
+  const [currCard, setCurrCard] = useState({})
 
   const handleClose = () => setShow(false)
+  //pass index from gallery through handleShow to modal
   const handleShow = (card) => {
-    setCurrentCard(card)
+    setCurrCard(card)
     setShow(true)
   }
 
@@ -28,7 +29,7 @@ const Home = ({cards}) => {
     <div id="home" className="home">
       {isLoaded ? 
         <div>
-          <CardModal show={show} handleClose={handleClose} currentCard={currentCard}/>
+          <CardModal show={show} handleClose={handleClose} currCard={currCard}/>
           <Container>
             <Row>
               <CardGallery cards={cards} handleShow={handleShow}/>
