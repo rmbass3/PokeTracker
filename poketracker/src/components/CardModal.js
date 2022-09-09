@@ -28,14 +28,14 @@ const CardModal = ({show, handleClose, currCard}) => {
               <Modal.Body>
                 <Container>
                   <Row>
-                    <Col s={12} md={6} className="text-center">
+                    <Col s={12} md={6} className="card-col text-center">
                       <img 
                         className="modal-img" 
                         src={currCard.images.large}
                         alt={currCard.name}>
                       </img>
                     </Col>
-                    <Col s={12} md={6}>
+                    <Col s={12} md={6} className="text-col">
                       <ListGroup>
                         <ListGroup.Item variant="dark">Series: {currCard.set.series}</ListGroup.Item> 
                         <ListGroup.Item variant="dark">Set: {currCard.set.name}</ListGroup.Item>

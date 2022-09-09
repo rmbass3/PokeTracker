@@ -1,7 +1,7 @@
 /* // X-Small devices (portrait phones, less than 576px)
 // No media query for `xs` since this is the default in Bootstrap */
 .modal-img {
-  width: 200px;
+  width: 330px;
 }
 
 .modal-dialog .modal-content {
@@ -12,17 +12,44 @@
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
+
+.row .text-col {
+  margin: auto 0;
+}
 /* // Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {  }
+@media (min-width: 576px) {
+  .modal-img {
+    width: 515px;
+  }
+}
 
 /* // Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) {  }
+@media (min-width: 768px) {
+  .modal-img {
+    width: 300px;
+  }
+  .card-modal .modal-dialog {
+    max-width: 50rem;
+  }
+}
 
 /* // Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {  }
+@media (min-width: 992px) {
+  .modal-img {
+    width: 330px;
+  }
+}
 
 /* // X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {  }
+@media (min-width: 1200px) {
+  .modal-img {
+    width: 330px;
+  }
+}
 
 /* // XX-Large devices (larger desktops, 1400px and up) */
-@media (min-width: 1400px) {  }
+@media (min-width: 1400px) {
+  .modal-img {
+    width: 330px;
+  }
+}
