@@ -4,10 +4,16 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import '../styles/Navibar.css'
 
-const Navibar = () => {
+const Navibar = ({searchBar, setSearchBar}) => {
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    console.log(searchBar)
+  }
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
@@ -22,14 +28,21 @@ const Navibar = () => {
             <Nav.Link href="#collection">Collection</Nav.Link>
             <Nav.Link href="#adv-search">Advanced Search</Nav.Link>
           </Nav>
-          <Form className="d-flex">
+          <Form className="d-flex" onSubmit={handleSubmit}>
             <Form.Control
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              value={searchBar}
+              onChange={e => setSearchBar(e.target.value)}
             />
-            <Button variant="outline-secondary">Search</Button>
+            <Button 
+              onClick={handleSubmit}
+              variant="outline-secondary"
+            >
+              Search
+            </Button>
           </Form>
         </Navbar.Collapse>
       </Container>

@@ -10,6 +10,7 @@ function App() {
 
   const [cards, setCards] = useState({})
   const [search, setSearch] = useState("name:charizard")
+  const [searchBar, setSearchBar] = useState("")
 
   const searchCards = () => {
     axios.get('https://api.pokemontcg.io/v2/cards', {
@@ -30,7 +31,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navibar />
+      <Navibar searchBar={searchBar} setSearchBar={setSearchBar}/>
       <Home cards={cards}/>
     </div>
   );

@@ -9,7 +9,6 @@ import '../styles/CardModal.css'
 
 const CardModal = ({show, handleClose, currCard}) => {
 
-  console.log(currCard)
   return (
     <div>
       {currCard.id ?
