@@ -30,7 +30,7 @@ const CardModal = ({show, handleClose, currCard}) => {
                   <Row>
                     <Col s={12} md={6} className="card-col text-center">
                       <img 
-                        className="modal-img" 
+                        className="modal-img"
                         src={currCard.images.large}
                         alt={currCard.name}>
                       </img>
