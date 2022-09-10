@@ -29,27 +29,36 @@
     width: 300px;
   }
   .card-modal .modal-dialog {
-    max-width: 50rem;
+    max-width: 45rem;
   }
 }
 
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
   .modal-img {
-    width: 330px;
+    width: 350px;
+  }
+  .card-modal .modal-dialog {
+    max-width: 60rem;
   }
 }
 
 /* // X-Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
   .modal-img {
-    width: 330px;
+    width: 400px;
+  }
+  .card-modal .modal-dialog {
+    max-width: 72.5rem;
   }
 }
 
 /* // XX-Large devices (larger desktops, 1400px and up) */
 @media (min-width: 1400px) {
   .modal-img {
-    width: 330px;
+    width: 450px;
+  }
+  .card-modal .modal-dialog {
+    max-width: 80rem;
   }
 }
