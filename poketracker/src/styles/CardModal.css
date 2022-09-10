@@ -16,6 +16,10 @@
 .row .text-col {
   margin: auto 0;
 }
+
+.list-group .list-group-item {
+  background-color: #fff0;
+}
 /* // Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
   .modal-img {

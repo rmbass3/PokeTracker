@@ -23,7 +23,7 @@ const CardModal = ({show, handleClose, currCard}) => {
               fullscreen="md-down"
             >
               <Modal.Header closeButton>
-                <Modal.Title className="text-dark text-center">{currCard.name}</Modal.Title>
+                <Modal.Title className="text-dark text-center"><h1>{currCard.name}</h1></Modal.Title>
               </Modal.Header>
               <Modal.Body>
                 <Container>
@@ -36,12 +36,12 @@ const CardModal = ({show, handleClose, currCard}) => {
                       </img>
                     </Col>
                     <Col s={12} md={6} className="text-col">
-                      <ListGroup>
-                        <ListGroup.Item variant="dark">Series: {currCard.set.series}</ListGroup.Item> 
-                        <ListGroup.Item variant="dark">Set: {currCard.set.name}</ListGroup.Item>
-                        <ListGroup.Item variant="dark">Released: {currCard.set.releaseDate}</ListGroup.Item>
-                        <ListGroup.Item variant="dark">Artist: {currCard.artist}</ListGroup.Item>
-                        <ListGroup.Item variant="dark">Rarity: {currCard.rarity}</ListGroup.Item> 
+                      <ListGroup variant="flush">
+                        <ListGroup.Item><h3>Series: <i>{currCard.set.series}</i></h3></ListGroup.Item> 
+                        <ListGroup.Item><h3>Set: <i>{currCard.set.name}</i></h3></ListGroup.Item>
+                        <ListGroup.Item><h3>Released: <i>{currCard.set.releaseDate}</i></h3></ListGroup.Item>
+                        <ListGroup.Item><h3>Artist: <i>{currCard.artist}</i></h3></ListGroup.Item>
+                        <ListGroup.Item><h3>Rarity: <i>{currCard.rarity}</i></h3></ListGroup.Item> 
                       </ListGroup>
                     </Col>
                   </Row>
