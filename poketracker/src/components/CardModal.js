@@ -14,7 +14,7 @@ const CardModal = ({show, handleClose, currCard}) => {
     <div>
       {currCard.id ?
           <div>
-            <Modal 
+            <Modal
               className="card-modal" 
               show={show} 
               onHide={handleClose} 

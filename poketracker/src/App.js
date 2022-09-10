@@ -1,5 +1,6 @@
 import React from 'react';
 import Home from './components/Home';
+import Navibar from './components/Navibar';
 import { useEffect, useState } from 'react';
 const { REACT_APP_PRIVATE_KEY } = process.env;
 const axios = require('axios')
@@ -29,6 +30,7 @@ function App() {
 
   return (
     <div className="App">
+      <Navibar />
       <Home cards={cards}/>
     </div>
   );
