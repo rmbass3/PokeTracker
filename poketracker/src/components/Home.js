@@ -21,7 +21,6 @@ const Home = ({cards, isLoaded, setIsLoaded}) => {
 
   useEffect(() => {
     cards.data ? setIsLoaded(true) : setIsLoaded(false)
-    console.log(isLoaded)
   }, [cards])
 
   return (

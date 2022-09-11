@@ -9,10 +9,15 @@ import '../styles/CardModal.css'
 
 const CardModal = ({show, handleClose, currCard}) => {
 
+  const findPrice = () => {
+    return currCard.cardmarket.prices.averageSellPrice ? currCard.cardmarket.prices.averageSellPrice : currCard.cardmarket.prices.trendPrice
+  }
+
   return (
     <div>
       {currCard.id ?
           <div>
+            {console.log(currCard)}
             <Modal
               className="card-modal" 
               show={show} 
@@ -40,7 +45,8 @@ const CardModal = ({show, handleClose, currCard}) => {
                         <ListGroup.Item><h3>Set: <i>{currCard.set.name}</i></h3></ListGroup.Item>
                         <ListGroup.Item><h3>Released: <i>{currCard.set.releaseDate}</i></h3></ListGroup.Item>
                         <ListGroup.Item><h3>Artist: <i>{currCard.artist}</i></h3></ListGroup.Item>
-                        <ListGroup.Item><h3>Rarity: <i>{currCard.rarity}</i></h3></ListGroup.Item> 
+                        <ListGroup.Item><h3>Rarity: <i>{currCard.rarity}</i></h3></ListGroup.Item>
+                        <ListGroup.Item><h3>Average Price: <i>${findPrice()}</i></h3></ListGroup.Item> 
                       </ListGroup>
                     </Col>
                   </Row>
