@@ -5,3 +5,12 @@
   -webkit-user-select: none;
   -ms-user-select: none;
 }
+
+.card-container {
+  width: 240px;
+  margin: 0 auto;
+}
+
+.no-cards {
+  margin-top: 40vh;
+}

@@ -38,7 +38,7 @@ const Navibar = ({searchBar, setSearchBar, setSearch}) => {
               onChange={e => setSearchBar(e.target.value)}
             />
             <Button 
-              onClick={handleSubmit}
+              type="submit"
               variant="outline-secondary"
             >
               Search
