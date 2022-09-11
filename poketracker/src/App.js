@@ -11,8 +11,10 @@ function App() {
   const [cards, setCards] = useState({})
   const [search, setSearch] = useState("charizard")
   const [searchBar, setSearchBar] = useState("")
+  const [isLoaded, setIsLoaded] = useState(false)
 
   const searchCards = () => {
+    setIsLoaded(false)
     axios.get('https://api.pokemontcg.io/v2/cards', {
       headers: {
         "x-api-key": REACT_APP_PRIVATE_KEY,
@@ -21,7 +23,10 @@ function App() {
         q: "name:" + search
       }
     })
-    .then(res => setCards(res))
+    .then(res => {
+      setIsLoaded(true)
+      setCards(res)
+    })
     .catch(err => console.log(err))
   }
 
@@ -32,7 +37,7 @@ function App() {
   return (
     <div className="App">
       <Navibar searchBar={searchBar} setSearchBar={setSearchBar} setSearch={setSearch}/>
-      <Home cards={cards}/>
+      <Home cards={cards} isLoaded={isLoaded} setIsLoaded={setIsLoaded}/>
     </div>
   );
 }

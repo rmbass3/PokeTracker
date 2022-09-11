@@ -8,14 +8,12 @@ import Row from 'react-bootstrap/Row'
 import '../styles/Home.css'
 
 
-const Home = ({cards}) => {
+const Home = ({cards, isLoaded, setIsLoaded}) => {
 
-  const [isLoaded, setIsLoaded] = useState(false)
   const [show, setShow] = useState(false)
   const [currCard, setCurrCard] = useState({})
 
   const handleClose = () => setShow(false)
-  //pass index from gallery through handleShow to modal
   const handleShow = (card) => {
     setCurrCard(card)
     setShow(true)
@@ -23,6 +21,7 @@ const Home = ({cards}) => {
 
   useEffect(() => {
     cards.data ? setIsLoaded(true) : setIsLoaded(false)
+    console.log(isLoaded)
   }, [cards])
 
   return (
