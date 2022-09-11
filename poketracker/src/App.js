@@ -9,7 +9,7 @@ const axios = require('axios')
 function App() {
 
   const [cards, setCards] = useState({})
-  const [search, setSearch] = useState("name:charizard")
+  const [search, setSearch] = useState("charizard")
   const [searchBar, setSearchBar] = useState("")
 
   const searchCards = () => {
@@ -18,7 +18,7 @@ function App() {
         "x-api-key": REACT_APP_PRIVATE_KEY,
       },
       params: {
-        q: search
+        q: "name:" + search
       }
     })
     .then(res => setCards(res))
@@ -31,7 +31,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navibar searchBar={searchBar} setSearchBar={setSearchBar}/>
+      <Navibar searchBar={searchBar} setSearchBar={setSearchBar} setSearch={setSearch}/>
       <Home cards={cards}/>
     </div>
   );

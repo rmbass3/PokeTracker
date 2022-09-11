@@ -6,12 +6,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import '../styles/Navibar.css'
 
-const Navibar = ({searchBar, setSearchBar}) => {
+const Navibar = ({searchBar, setSearchBar, setSearch}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    console.log(searchBar)
+    setSearch(searchBar)
   }
 
   return (
