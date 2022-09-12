@@ -3,7 +3,7 @@ import Home from './components/Home';
 import Navibar from './components/Navibar';
 import Login from './components/Login';
 import { useEffect, useState } from 'react';
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 const { REACT_APP_PRIVATE_KEY } = process.env;
 const axios = require('axios')
 
