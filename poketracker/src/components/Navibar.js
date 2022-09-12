@@ -24,10 +24,10 @@ const Navibar = ({searchBar, setSearchBar, setSearch}) => {
           <Nav
             className="me-auto my-2 my-lg-0"
           >
-            <Nav.Link><Link to="/login" className="text-light">Login</Link></Nav.Link>
-            <Nav.Link href="#about">About</Nav.Link>
-            <Nav.Link href="#collection">Collection</Nav.Link>
-            <Nav.Link href="#adv-search">Advanced Search</Nav.Link>
+            <Navbar.Text><Link to="/login" className="text-light">Login</Link></Navbar.Text>
+            <Navbar.Text href="#about">About</Navbar.Text>
+            <Navbar.Text href="#collection">Collection</Navbar.Text>
+            <Navbar.Text href="#adv-search">Advanced Search</Navbar.Text>
           </Nav>
           <Form className="d-flex" onSubmit={handleSubmit}>
             <Form.Control
