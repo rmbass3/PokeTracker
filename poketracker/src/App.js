@@ -4,6 +4,7 @@ import Navibar from './components/Navibar';
 import Login from './components/Login';
 import { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 const { REACT_APP_PRIVATE_KEY } = process.env;
 const axios = require('axios')
 
@@ -14,6 +15,16 @@ function App() {
   const [search, setSearch] = useState("charizard")
   const [searchBar, setSearchBar] = useState("")
   const [isLoaded, setIsLoaded] = useState(false)
+  const [user, setUser] = useState({})
+  const auth = getAuth();
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setUser(user)
+    } else {
+      setUser({})
+    }
+  });
 
   const searchCards = () => {
     setIsLoaded(false)
@@ -38,9 +49,9 @@ function App() {
 
   return (
     <div className="App">
-      <Navibar searchBar={searchBar} setSearchBar={setSearchBar} setSearch={setSearch}/>
+      <Navibar searchBar={searchBar} setSearchBar={setSearchBar} setSearch={setSearch} user={user}/>
       <Routes>
-        <Route path="/" element={<Home cards={cards} isLoaded={isLoaded} setIsLoaded={setIsLoaded}/>} />
+        <Route path="/" element={<Home cards={cards} isLoaded={isLoaded} setIsLoaded={setIsLoaded} user={user}/>} />
         <Route path="/login" element={<Login/>} />
       </Routes>
       

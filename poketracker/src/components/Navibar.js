@@ -7,12 +7,17 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link } from "react-router-dom";
 import '../styles/Navibar.css'
 
-const Navibar = ({searchBar, setSearchBar, setSearch}) => {
+const Navibar = ({searchBar, setSearchBar, setSearch, user}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
     e.stopPropagation()
     setSearch(searchBar)
+  }
+
+  const getUser = () => {
+    console.log(user)
+    return user ? user.email : "Login"
   }
 
   return (
@@ -24,7 +29,7 @@ const Navibar = ({searchBar, setSearchBar, setSearch}) => {
           <Nav
             className="me-auto my-2 my-lg-0"
           >
-            <Navbar.Text><Link to="/login" className="text-light">Login</Link></Navbar.Text>
+            <Navbar.Text><Link to="/login" className="text-light">{getUser()}</Link></Navbar.Text>
             <Navbar.Text href="#about">About</Navbar.Text>
             <Navbar.Text href="#collection">Collection</Navbar.Text>
             <Navbar.Text href="#adv-search">Advanced Search</Navbar.Text>

@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row'
 import '../styles/Home.css'
 
 
-const Home = ({cards, isLoaded, setIsLoaded}) => {
+const Home = ({cards, isLoaded, setIsLoaded, user}) => {
 
   const [show, setShow] = useState(false)
   const [currCard, setCurrCard] = useState({})
