@@ -15,10 +15,16 @@ const Navibar = ({searchBar, setSearchBar, setSearch, user}) => {
     setSearch(searchBar)
   }
 
-  const getUser = () => {
-    console.log(user)
-    return user ? user.email : "Login"
+  
+  const getLoginLink = () => {
+    if (Object.keys(user).length === 0) {
+      return "Login"
+    } else {
+      let email = user.email
+      return email.substring(0, email.indexOf("@"))
+    }
   }
+
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
@@ -29,7 +35,7 @@ const Navibar = ({searchBar, setSearchBar, setSearch, user}) => {
           <Nav
             className="me-auto my-2 my-lg-0"
           >
-            <Navbar.Text><Link to="/login" className="text-light">{getUser()}</Link></Navbar.Text>
+            <Navbar.Text><Link to="/login" className="text-light">{getLoginLink()}</Link></Navbar.Text>
             <Navbar.Text href="#about">About</Navbar.Text>
             <Navbar.Text href="#collection">Collection</Navbar.Text>
             <Navbar.Text href="#adv-search">Advanced Search</Navbar.Text>
