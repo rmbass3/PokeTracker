@@ -4,6 +4,7 @@ import Navibar from './components/Navibar';
 import Login from './components/Login';
 import { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { useAuthState } from "react-firebase-hooks/auth"
 import { auth } from "../src/Firebase"
 const { REACT_APP_PRIVATE_KEY } = process.env;
@@ -15,7 +16,8 @@ function App() {
   const [search, setSearch] = useState("charizard")
   const [searchBar, setSearchBar] = useState("")
   const [isLoaded, setIsLoaded] = useState(false)
-  const [user] = useAuthState(auth)
+  const [user, loading] = useAuthState(auth)
+  const navigate = useNavigate()
 
   const searchCards = () => {
     setIsLoaded(false)
@@ -38,12 +40,20 @@ function App() {
     searchCards()
   }, [search])
 
+  useEffect(() => {
+    if (user) {
+      navigate("/home")
+    } else {
+      navigate("/")
+    }
+  }, [user, loading])
+
   return (
     <div className="App">
-      <Navibar searchBar={searchBar} setSearchBar={setSearchBar} setSearch={setSearch} user={user}/>
+      {user ? <Navibar searchBar={searchBar} setSearchBar={setSearchBar} setSearch={setSearch} user={user}/> : <></>}
       <Routes>
-        <Route path="/" element={<Home cards={cards} isLoaded={isLoaded} setIsLoaded={setIsLoaded} user={user}/>} />
-        <Route path="/login" element={<Login/>} />
+        <Route path="/" element={<Login/>} />
+        <Route path="/home" element={<Home cards={cards} isLoaded={isLoaded} setIsLoaded={setIsLoaded} user={user}/>} />
       </Routes>
       
     </div>

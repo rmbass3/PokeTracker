@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from "react-router-dom";
+import { logout } from "../Firebase";
 import '../styles/Navibar.css'
 
 const Navibar = ({searchBar, setSearchBar, setSearch, user}) => {
@@ -13,16 +14,6 @@ const Navibar = ({searchBar, setSearchBar, setSearch, user}) => {
     e.preventDefault()
     e.stopPropagation()
     setSearch(searchBar)
-  }
-
-  
-  const getLoginLink = () => {
-    if (!user) {
-      return "Login"
-    } else {
-      let email = user.email
-      return email.substring(0, email.indexOf("@"))
-    }
   }
 
 
@@ -35,7 +26,7 @@ const Navibar = ({searchBar, setSearchBar, setSearch, user}) => {
           <Nav
             className="me-auto my-2 my-lg-0"
           >
-            <Navbar.Text><Link to="/login" className="text-light">{getLoginLink()}</Link></Navbar.Text>
+            <Navbar.Text onClick={logout}><Link to="/" className="text-light">Logout</Link></Navbar.Text>
             <Navbar.Text href="#about">About</Navbar.Text>
             <Navbar.Text href="#collection">Collection</Navbar.Text>
             <Navbar.Text href="#adv-search">Advanced Search</Navbar.Text>
