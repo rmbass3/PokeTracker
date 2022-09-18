@@ -2,6 +2,8 @@ import React from 'react';
 import Home from './components/Home';
 import Navibar from './components/Navibar';
 import Login from './components/Login';
+import Reset from "./components/Reset";
+import Register from "./components/Register";
 import { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
@@ -54,6 +56,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Login/>} />
         <Route path="/home" element={<Home cards={cards} isLoaded={isLoaded} setIsLoaded={setIsLoaded} user={user}/>} />
+        <Route path="/reset" element={<Reset/>} />
+        <Route path="/register" element={<Register/>} />
       </Routes>
       
     </div>
