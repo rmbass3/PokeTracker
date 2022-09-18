@@ -17,7 +17,7 @@ const Navibar = ({searchBar, setSearchBar, setSearch, user}) => {
 
   
   const getLoginLink = () => {
-    if (Object.keys(user).length === 0) {
+    if (!user) {
       return "Login"
     } else {
       let email = user.email

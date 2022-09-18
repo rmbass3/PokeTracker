@@ -20,7 +20,7 @@ const firebaseConfig = {
   measurementId: REACT_APP_FIREBASE_MEASUREMENT_ID
 }
 
-const app = firebase.initializeApp(firebaseConfig)
+export const app = firebase.initializeApp(firebaseConfig)
 
 export const createUI = () => {
   const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebase.auth())
