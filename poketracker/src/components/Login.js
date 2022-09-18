@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "../styles/Login.css"
-import { createUI } from "../Firebase";
 
 const Login = () => {
 
-  useEffect(() => {
-    createUI()
-  }, [])
+  // useEffect(() => {
+  //   createUI()
+  // }, [])
 
   return (
     <div id="login">

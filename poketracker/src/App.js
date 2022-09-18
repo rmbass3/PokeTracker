@@ -4,12 +4,10 @@ import Navibar from './components/Navibar';
 import Login from './components/Login';
 import { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
-import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth"
-import { app } from "../src/Firebase"
+import { auth } from "../src/Firebase"
 const { REACT_APP_PRIVATE_KEY } = process.env;
 const axios = require('axios')
-const auth = getAuth(app)
 
 function App() {
 
