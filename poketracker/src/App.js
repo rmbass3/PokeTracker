@@ -43,6 +43,7 @@ function App() {
   }, [search])
 
   useEffect(() => {
+    console.log(user)
     if (user) {
       navigate("/home")
     } else {

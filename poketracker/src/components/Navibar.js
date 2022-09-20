@@ -4,16 +4,26 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { logout } from "../Firebase";
 import '../styles/Navibar.css'
 
+
+
 const Navibar = ({searchBar, setSearchBar, setSearch, user}) => {
+
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
     e.stopPropagation()
     setSearch(searchBar)
+  }
+
+  const handleLogout = () => {
+    logout()
+    navigate("/home")
   }
 
 
@@ -26,7 +36,7 @@ const Navibar = ({searchBar, setSearchBar, setSearch, user}) => {
           <Nav
             className="me-auto my-2 my-lg-0"
           >
-            <Navbar.Text onClick={logout}><Link to="/" className="text-light">Logout</Link></Navbar.Text>
+            <Navbar.Text onClick={handleLogout}><Link to="/" className="text-light">Logout</Link></Navbar.Text>
             <Navbar.Text href="#about">About</Navbar.Text>
             <Navbar.Text href="#collection">Collection</Navbar.Text>
             <Navbar.Text href="#adv-search">Advanced Search</Navbar.Text>
