@@ -42,14 +42,14 @@ function App() {
     searchCards()
   }, [search])
 
-  useEffect(() => {
-    console.log(user)
-    if (user) {
-      navigate("/home")
-    } else {
-      navigate("/")
-    }
-  }, [user, loading])
+  // useEffect(() => {
+  //   console.log(user)
+  //   if (user) {
+  //     navigate("/home")
+  //   } else {
+  //     navigate("/")
+  //   }
+  // }, [user, loading])
 
   return (
     <div className="App">
