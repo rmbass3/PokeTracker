@@ -30,19 +30,22 @@ const Register = () => {
     console.log("Validate the form")
     
     let errors = {}
+
+    // Check email
     if (!values.email){
       errors.email = "Email address is required"
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
       errors.email = "Email address is invalid"
     }
 
+    // Check username
+    if (values.username.length > 0 && (values.username.length < 3 || values.username.length > 20)){
+      errors.username = "Invalid username length"
+    }
+
     setFormErrors(errors)
 
-    if (Object.keys(errors).length === 0) {
-      return true
-    } else {
-      return false
-    }
+    return (Object.keys(errors).length === 0)
   }
 
   const handleSubmit = (e) => {
@@ -67,13 +70,13 @@ const Register = () => {
           onClose={() => setShowMessage(false)}
           dismissible
         >
-          <p>Alert message</p>
+          <p>Form submitted!</p>
         </Alert>
         <Form onSubmit={handleSubmit} className="register-form">
           <Form.Group className="mb-3 pt-3" controlId="regEmail">
             <Form.Label className="text-light">Email*</Form.Label>
             <Form.Control
-              className=""
+              className="mb-2"
               type="email" 
               name="email"
               value={values.email}
