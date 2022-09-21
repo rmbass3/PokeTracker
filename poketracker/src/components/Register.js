@@ -33,14 +33,28 @@ const Register = () => {
 
     // Check email
     if (!values.email){
-      errors.email = "Email address is required"
+      errors.email = "Email address is required."
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
-      errors.email = "Email address is invalid"
+      errors.email = "Email address is invalid."
     }
 
     // Check username
     if (values.username.length > 0 && (values.username.length < 3 || values.username.length > 20)){
-      errors.username = "Invalid username length"
+      errors.username = "Invalid username length."
+    }
+
+    // Check password
+    if (values.password.length < 8){
+      errors.password = "Invalid password length"
+    } else if (!/[a-z]/.test(values.password)){
+      errors.password = "Your password must contain at least one letter."
+    } else if (!/[0-9]/.test(values.password)){
+      errors.password = "Your password must contain at least one digit."
+    }
+
+    // Check second password
+    if (values.password !== values.secondPassword){
+      errors.secondPassword = "Passwords do not match."
     }
 
     setFormErrors(errors)
@@ -121,8 +135,7 @@ const Register = () => {
               </p>
             )}
             <Form.Text muted>
-              Your password must be 8-20 characters long, contain letters and numbers,
-              and must not contain spaces, special characters, or emoji.
+              Your password must be at least 8 characters long, and contain letters and numbers.
             </Form.Text>
           </Form.Group>
           <Form.Group className="mb-3" controlId="regSecondPassword">
