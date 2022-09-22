@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button";
-import Spinner from "react-bootstrap/Spinner"
 import { useNavigate } from 'react-router-dom';
 import { auth, registerWithEmailAndPassword } from "../Firebase"
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -11,7 +10,6 @@ import "../styles/Register.css"
 
 const Register = () => {
 
-  const [showSpinner, setShowSpinner] = useState(false)
   const [values, setValues] = useState({
     email: "",
     username: "",
@@ -62,14 +60,37 @@ const Register = () => {
     return (Object.keys(errors).length === 0)
   }
 
-  const handleSubmit = (e) => {
+  const validateServer = (serverError) => {
+    let errors = {}
+    
+    if (serverError === "auth/email-already-in-use"){
+      errors.email = "Email address \"" + values.email + "\" is already in use."
+    }
+      
+    if (serverError === "auth/invalid-email"){
+      errors.email = "Email address " + values.email + " is invalid."
+    }
+
+    if (serverError === "auth/operation-not-allowed"){
+      errors.secondPassword = "Error during registration."
+    }
+
+    if (serverError === "auth/weak-password"){
+      errors.password = "Password is not strong enough."
+    }
+
+    setFormErrors(errors)
+  }
+
+  const handleSubmit = async (e) => {
     if (e) e.preventDefault()
 
     if (validate(values)){
-      setShowSpinner(true)
-      registerWithEmailAndPassword(values.username, values.email, values.password)
-    } else {
-      setShowSpinner(false)
+      const serverError = await registerWithEmailAndPassword(values.username, values.email, values.password)
+      if (serverError) {
+        validateServer(serverError)
+        return
+      }
     }
   }
 
@@ -85,90 +106,83 @@ const Register = () => {
 
   return (
     <div id="register" className="register">
-      {showSpinner ? 
-        <Spinner
-          animation="border"
-          size="lg"
-        />
-        :
-        <Container className="justify-content-center w-50 bg-dark">
-          <Form onSubmit={handleSubmit} className="register-form">
-            <Form.Group className="mb-3 pt-3" controlId="regEmail">
-              <Form.Label className="text-light">Email*</Form.Label>
-              <Form.Control
-                className="mb-2"
-                type="email" 
-                name="email"
-                value={values.email}
-                onChange={handleChange}
-              />
-              {formErrors.email && (
-                <p className="text-warning">
-                  {formErrors.email}
-                </p>
-              )}
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="regUsername">
-              <Form.Label className="text-light">Username</Form.Label>
-              <Form.Control 
-                className="mb-2" 
-                type="text"
-                name="username"
-                value={values.username}
-                onChange={handleChange}
-              />
-              {formErrors.username && (
-                <p className="text-warning">
-                  {formErrors.username}
-                </p>
-              )}
-              <Form.Text muted>
-                Your username must be 3-20 characters long.
-              </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="regPassword">
-              <Form.Label className="text-light" >Password*</Form.Label>
-              <Form.Control 
-                className="mb-2" 
-                type="password"
-                name="password"
-                value={values.password}
-                onChange={handleChange}
-              />
-              {formErrors.password && (
-                <p className="text-warning">
-                  {formErrors.password}
-                </p>
-              )}
-              <Form.Text muted>
-                Your password must be at least 8 characters long, and contain letters and numbers.
-              </Form.Text>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="regSecondPassword">
-              <Form.Label className="text-light">Confirm Password*</Form.Label>
-              <Form.Control
-                className="mb-2" 
-                type="password" 
-                name="secondPassword"
-                value={values.secondPassword}
-                onChange={handleChange}
-              />
-              {formErrors.secondPassword && (
-                <p className="text-warning">
-                  {formErrors.secondPassword}
-                </p>
-              )}
-            </Form.Group>
-            <Button 
-              className="mb-3 w-100 py-2" 
-              variant="secondary" 
-              type="submit"
-            >
-              Register
-            </Button>
-          </Form>
-        </Container>
-      }
+      <Container className="justify-content-center w-50 bg-dark">
+        <Form onSubmit={handleSubmit} className="register-form">
+          <Form.Group className="mb-3 pt-3" controlId="regEmail">
+            <Form.Label className="text-light">Email*</Form.Label>
+            <Form.Control
+              className="mb-2"
+              type="email" 
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+            />
+            {formErrors.email && (
+              <p className="text-warning">
+                {formErrors.email}
+              </p>
+            )}
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="regUsername">
+            <Form.Label className="text-light">Username</Form.Label>
+            <Form.Control 
+              className="mb-2" 
+              type="text"
+              name="username"
+              value={values.username}
+              onChange={handleChange}
+            />
+            {formErrors.username && (
+              <p className="text-warning">
+                {formErrors.username}
+              </p>
+            )}
+            <Form.Text muted>
+              Your username must be 3-20 characters long.
+            </Form.Text>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="regPassword">
+            <Form.Label className="text-light" >Password*</Form.Label>
+            <Form.Control 
+              className="mb-2" 
+              type="password"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+            />
+            {formErrors.password && (
+              <p className="text-warning">
+                {formErrors.password}
+              </p>
+            )}
+            <Form.Text muted>
+              Your password must be at least 8 characters long, and contain letters and numbers.
+            </Form.Text>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="regSecondPassword">
+            <Form.Label className="text-light">Confirm Password*</Form.Label>
+            <Form.Control
+              className="mb-2" 
+              type="password" 
+              name="secondPassword"
+              value={values.secondPassword}
+              onChange={handleChange}
+            />
+            {formErrors.secondPassword && (
+              <p className="text-warning">
+                {formErrors.secondPassword}
+              </p>
+            )}
+          </Form.Group>
+          <Button 
+            className="mb-3 w-100 py-2" 
+            variant="secondary" 
+            type="submit"
+          >
+            Register
+          </Button>
+        </Form>
+      </Container>
     </div>
   )
 }

@@ -54,18 +54,24 @@ const logInWithEmailAndPassword = async (email, password) => {
 }
 
 const registerWithEmailAndPassword = async (name, email, password) => {
-  try {
-    const res = await createUserWithEmailAndPassword(auth, email, password)
-    const user = res.user
-    await addDoc(collection(db, "users"), {
-      uid: user.uid,
-      name,
-      authProvider: "local",
-      email
+  
+  let errorMessage
+
+  await createUserWithEmailAndPassword(auth, email, password)
+    .then ((res) => {
+      const user = res.user
+      addDoc(collection(db, "users"), {
+        uid: user.uid,
+        name,
+        authProvider: "local",
+        email
+      })
     })
-  } catch (e) {
-    console.error(e)
-  }
+    .catch(e => {
+      errorMessage = e.code
+    })
+
+    return errorMessage
 }
 
 const sendPasswordReset = async (email) => {
