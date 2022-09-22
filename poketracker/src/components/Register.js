@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner"
 import { useNavigate } from 'react-router-dom';
-import { registerWithEmailAndPassword } from "../Firebase"
+import { auth, registerWithEmailAndPassword } from "../Firebase"
+import { useAuthState } from "react-firebase-hooks/auth";
 import "../styles/Register.css"
+
 
 const Register = () => {
 
@@ -17,9 +19,10 @@ const Register = () => {
     secondPassword: "",
   })
   const [formErrors, setFormErrors] = useState({})
+  const [user, loading] = useAuthState(auth)
+  const navigate= useNavigate()
 
   const handleChange = (e) => {
-    console.log("handleChange -> " + e.target.name + " : " + e.target.value)
     setValues((values) => ({
       ...values,
       [e.target.name]: e.target.value
@@ -27,8 +30,6 @@ const Register = () => {
   }
 
   const validate = () => {
-    console.log("Validate the form")
-    
     let errors = {}
 
     // Check email
@@ -58,21 +59,28 @@ const Register = () => {
     }
 
     setFormErrors(errors)
-
     return (Object.keys(errors).length === 0)
   }
 
   const handleSubmit = (e) => {
-    if (e) {
-      e.preventDefault()
-    }
+    if (e) e.preventDefault()
 
     if (validate(values)){
       setShowSpinner(true)
+      registerWithEmailAndPassword(values.username, values.email, values.password)
     } else {
       setShowSpinner(false)
     }
   }
+
+  useEffect(() => {
+    if (loading) {
+      return
+    }
+    if (user) {
+      navigate("/home")
+    }
+  }, [user, loading])
 
 
   return (
