@@ -23,7 +23,7 @@ const Navibar = ({searchBar, setSearchBar, setSearch, user}) => {
 
   const handleLogout = () => {
     logout()
-    navigate("/home")
+    navigate("/login")
   }
 
 
@@ -36,7 +36,7 @@ const Navibar = ({searchBar, setSearchBar, setSearch, user}) => {
           <Nav
             className="me-auto my-2 my-lg-0"
           >
-            <Navbar.Text onClick={handleLogout}><Link to="/" className="text-light">Logout</Link></Navbar.Text>
+            <Navbar.Text onClick={handleLogout}><Link to="/login" className="text-light">Logout</Link></Navbar.Text>
             <Navbar.Text href="#about">About</Navbar.Text>
             <Navbar.Text href="#collection">Collection</Navbar.Text>
             <Navbar.Text href="#adv-search">Advanced Search</Navbar.Text>

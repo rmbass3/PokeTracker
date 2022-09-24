@@ -16,7 +16,7 @@ const Reset = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if (loading) return;
-    if (user) navigate("/home");
+    if (user) navigate("/");
   }, [user, loading]);
 
   const handleSubmit = async (email) => {

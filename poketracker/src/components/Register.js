@@ -95,12 +95,8 @@ const Register = () => {
   }
 
   useEffect(() => {
-    if (loading) {
-      return
-    }
-    if (user) {
-      navigate("/home")
-    }
+    if (loading) return
+    if (user) navigate("/")
   }, [user, loading])
 
 

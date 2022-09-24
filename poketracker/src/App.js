@@ -44,9 +44,9 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      navigate("/home")
-    } else {
       navigate("/")
+    } else {
+      navigate("/login")
     }
   }, [user, loading])
 
@@ -54,8 +54,8 @@ function App() {
     <div className="App">
       {user ? <Navibar searchBar={searchBar} setSearchBar={setSearchBar} setSearch={setSearch} user={user}/> : <></>}
       <Routes>
-        <Route path="/" element={<Login/>} />
-        <Route path="/home" element={<Home cards={cards} isLoaded={isLoaded} setIsLoaded={setIsLoaded} user={user}/>} />
+        <Route path="/" element={<Home cards={cards} isLoaded={isLoaded} setIsLoaded={setIsLoaded} user={user}/>} />
+        <Route path="/login" element={<Login/>} />
         <Route path="/reset" element={<Reset/>} />
         <Route path="/register" element={<Register/>} />
       </Routes>
