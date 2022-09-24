@@ -5,3 +5,11 @@ a {
 .navbar-text {
   padding: 0.5rem;
 }
+
+.fa-border {
+  border-radius: 100%!important;
+}
+
+.fa-user {
+  font-size: 1.5rem;
+}
