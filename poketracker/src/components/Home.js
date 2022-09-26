@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row'
 import '../styles/Home.css'
 
 
-const Home = ({cards, isLoaded, setIsLoaded, user}) => {
+const Home = ({cards, cardsLoaded, setCardsLoaded, loadingUser, user}) => {
 
   const [show, setShow] = useState(false)
   const [currCard, setCurrCard] = useState({})
@@ -20,12 +20,12 @@ const Home = ({cards, isLoaded, setIsLoaded, user}) => {
   }
 
   useEffect(() => {
-    cards.data ? setIsLoaded(true) : setIsLoaded(false)
+    cards.data ? setCardsLoaded(true) : setCardsLoaded(false)
   }, [cards])
 
   return (
     <div id="home" className="home">
-      {isLoaded ? 
+      {(cardsLoaded && !loadingUser) ? 
         <div>
           <CardModal show={show} handleClose={handleClose} currCard={currCard}/>
           <Container>

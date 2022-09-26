@@ -5,3 +5,58 @@ a {
 .navbar-text {
   padding: 0.5rem;
 }
+
+.fa-border {
+  border-radius: 100%!important;
+}
+
+.fa-user {
+  font-size: 26px;
+}
+
+.fa-caret-down{
+  font-size: 1rem;
+}
+
+.caret-down-span{
+  display: flex;
+  align-items: center;
+}
+
+.user-button {
+  background-color: transparent;
+  border: none;
+}
+
+.dropdown-toggle::after {
+  display: none!important;
+}
+
+.dropdown-menu[data-bs-popper] {
+  top: 120%!important;
+  left: -100px!important;
+}
+
+.dropdown-menu {
+  width: 100%;
+}
+
+.dropdown a {
+  padding-top: 0;
+  padding-bottom: 0;
+  white-space: pre-wrap;
+  overflow: hidden;
+}
+
+#dropdown-username:active {
+  background-color: inherit;
+}
+
+.pfp-img {
+  width: 40px;
+  border-radius: 100%;
+}
+
+.pfp-container {
+
+}

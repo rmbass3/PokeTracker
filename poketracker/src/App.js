@@ -2,25 +2,27 @@ import React from 'react';
 import Home from './components/Home';
 import Navibar from './components/Navibar';
 import Login from './components/Login';
+import Reset from "./components/Reset";
+import Register from "./components/Register";
 import { useEffect, useState } from 'react';
 import { Routes, Route } from "react-router-dom";
-import { getAuth } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
 import { useAuthState } from "react-firebase-hooks/auth"
-import { app } from "../src/Firebase"
+import { auth } from "../src/Firebase"
 const { REACT_APP_PRIVATE_KEY } = process.env;
 const axios = require('axios')
-const auth = getAuth(app)
 
 function App() {
 
   const [cards, setCards] = useState({})
   const [search, setSearch] = useState("charizard")
   const [searchBar, setSearchBar] = useState("")
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [user] = useAuthState(auth)
+  const [cardsLoaded, setCardsLoaded] = useState(false)
+  const [user, loading] = useAuthState(auth)
+  const navigate = useNavigate()
 
   const searchCards = () => {
-    setIsLoaded(false)
+    setCardsLoaded(false)
     axios.get('https://api.pokemontcg.io/v2/cards', {
       headers: {
         "x-api-key": REACT_APP_PRIVATE_KEY,
@@ -30,7 +32,7 @@ function App() {
       }
     })
     .then(res => {
-      setIsLoaded(true)
+      setCardsLoaded(true)
       setCards(res)
     })
     .catch(err => console.log(err))
@@ -40,12 +42,24 @@ function App() {
     searchCards()
   }, [search])
 
+  useEffect(() => {
+    if (!loading){
+      if (user) {
+        navigate("/")
+      } else {
+        navigate("/login")
+      }
+    }
+  }, [user, loading])
+
   return (
     <div className="App">
-      <Navibar searchBar={searchBar} setSearchBar={setSearchBar} setSearch={setSearch} user={user}/>
+      {user ? <Navibar searchBar={searchBar} setSearchBar={setSearchBar} setSearch={setSearch} user={user}/> : <></>}
       <Routes>
-        <Route path="/" element={<Home cards={cards} isLoaded={isLoaded} setIsLoaded={setIsLoaded} user={user}/>} />
+        <Route path="/" element={<Home cards={cards} cardsLoaded={cardsLoaded} setCardsLoaded={setCardsLoaded} loadingUser={loading} user={user}/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/reset" element={<Reset/>} />
+        <Route path="/register" element={<Register/>} />
       </Routes>
       
     </div>
