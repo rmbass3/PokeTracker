@@ -1,5 +1,5 @@
 import React from "react";
-import Button from 'react-bootstrap/Button';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { logout } from "../Firebase";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import '../styles/Navibar.css'
 
 
@@ -28,7 +29,32 @@ const Navibar = ({searchBar, setSearchBar, setSearch, user}) => {
     navigate("/login")
   }
 
-  console.log(user.photoURL)
+  const getUsername = () => {
+    return user.displayName ? user.displayName : user.email.slice(0, user.email.indexOf("@"))
+  }
+
+  const getProfilePic = () => {
+    return (
+      <div>
+        {user.photoURL ? 
+          <div className="pfp-container d-flex">
+            <img className="pfp-img me-1" alt="profile" src={user.photoURL} />
+            <span className="caret-down-span">
+              <FontAwesomeIcon className="text-light" icon={faCaretDown}/>
+            </span>
+          </div>
+        : 
+          <div className="default-container d-flex">
+            <FontAwesomeIcon className="text-light me-1" icon={faUser} border/>
+            <span className="caret-down-span">
+              <FontAwesomeIcon className="text-light" icon={faCaretDown}/>
+            </span>
+          </div>
+        }
+      </div>
+    )
+  }
+  
 
 
   return (
@@ -40,10 +66,6 @@ const Navibar = ({searchBar, setSearchBar, setSearch, user}) => {
           <Nav
             className="me-auto my-2 my-lg-0"
           >
-            {/* <Navbar.Text onClick={handleLogout}><Link to="/login" className="text-light">Logout</Link></Navbar.Text>
-            <Navbar.Text href="#about">About</Navbar.Text>
-            <Navbar.Text href="#collection">Collection</Navbar.Text>
-            <Navbar.Text href="#adv-search">Advanced Search</Navbar.Text> */}
             <Form className="d-flex" onSubmit={handleSubmit}>
               <Form.Control
                 type="search"
@@ -55,8 +77,32 @@ const Navibar = ({searchBar, setSearchBar, setSearch, user}) => {
               />
             </Form>
           </Nav>
-          <Nav>
-            <FontAwesomeIcon color="#fff" icon={faUser} border/>
+          <Nav className="me-3">
+            <NavDropdown
+              title={
+                <div className="d-flex">
+                  {getProfilePic()}
+                </div>
+              }
+              menuVariant="dark"
+              drop="down"
+            >
+              <NavDropdown.Item id="dropdown-username">
+                Signed in as <br/><b>{getUsername()}</b>
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item id="dropdown-profile">
+                Profile
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item id="dropdown-collection">
+                Collection
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item id="dropdown-signout" onClick={handleLogout}>
+                Sign out
+              </NavDropdown.Item>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>
