@@ -5,35 +5,33 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from "react-bootstrap/Container";
 import ListGroup from 'react-bootstrap/ListGroup'
-// import { addDoc, collection } from "firebase/firestore"
-// import { db } from '../Firebase'
+import { doc, updateDoc, arrayUnion } from "firebase/firestore"
+import { db } from '../Firebase'
 import '../styles/CardModal.css'
 
-const CardModal = ({show, handleClose, currCard}) => {
+const CardModal = ({show, handleClose, currCard, user}) => {
 
   const findPrice = () => {
     return currCard.cardmarket.prices.averageSellPrice ? currCard.cardmarket.prices.averageSellPrice : currCard.cardmarket.prices.trendPrice
   }
 
-  // const addUserCard = async (currCard) => {
-  //   handleClose()
-  //   try {
-  //     const docRef = await addDoc(collection(db, "user-cards"), {
-  //       id: currCard.id,
-  //       name: currCard.name
-  //     })
-  //     console.log("Document written with ID:", docRef.id)
-  //   } catch (e) {
-  //     console.error(e)
-  //   }
+  const addUserCard = async (id) => {
+    handleClose()
+    try {
+      await updateDoc(doc(db, "users", user.email), {
+        collection: arrayUnion(id)
+      })
+    } catch (e) {
+      console.error(e)
+    }
     
-  // }
+  }
 
   return (
     <div>
       {currCard.id ?
           <div>
-            {/* {console.log(currCard)} */}
+            {console.log(currCard.id)}
             <Modal
               className="card-modal" 
               show={show} 
@@ -72,8 +70,7 @@ const CardModal = ({show, handleClose, currCard}) => {
                 <Button variant="secondary" onClick={handleClose}>
                   Close
                 </Button>
-                {/* onClick={() => addUserCard(currCard)} */}
-                <Button variant="primary">
+                <Button variant="primary" onClick={() => addUserCard(currCard.id)}>
                   Add to Collection
                 </Button>
               </Modal.Footer>

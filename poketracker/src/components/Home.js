@@ -27,7 +27,7 @@ const Home = ({cards, cardsLoaded, setCardsLoaded, loadingUser, user}) => {
     <div id="home" className="home">
       {(cardsLoaded && !loadingUser) ? 
         <div>
-          <CardModal show={show} handleClose={handleClose} currCard={currCard}/>
+          <CardModal show={show} handleClose={handleClose} currCard={currCard} user={user}/>
           <Container>
             <Row>
               <CardGallery cards={cards} handleShow={handleShow}/>

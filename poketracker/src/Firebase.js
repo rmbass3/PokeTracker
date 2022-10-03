@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, getFirestore, query, where } from "firebase/firestore"
+import { setDoc, doc, collection, getDocs, getFirestore, query, where } from "firebase/firestore"
 import "firebaseui/dist/firebaseui.css"
 import firebase from "firebase/compat/app"
 import { GoogleAuthProvider, getAuth, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut} from "firebase/auth"
@@ -33,11 +33,12 @@ const signInWithGoogle = async () => {
     const q = query(collection(db, "users"), where("uid", "==", user.uid))
     const docs = await getDocs(q)
     if (docs.docs.length === 0) {
-      await addDoc(collection(db, "users"), {
+      await setDoc(doc(db, "users", user.email), {
         uid: user.uid,
         name: user.displayName,
         authProvider: "google",
         email: user.email,
+        collection: [],
       })
     }
   } catch (e) {
@@ -60,11 +61,13 @@ const registerWithEmailAndPassword = async (name, email, password) => {
   await createUserWithEmailAndPassword(auth, email, password)
     .then ((res) => {
       const user = res.user
-      addDoc(collection(db, "users"), {
+      setDoc(doc(db, "users", email), {
         uid: user.uid,
         name,
         authProvider: "local",
-        email
+        email,
+        collection: [],
+
       })
     })
     .catch(e => {
